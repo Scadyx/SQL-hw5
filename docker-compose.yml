@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  postgres:
+    image: postgres:15.1
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - '5432:5432'
+  app:
+    build: ./hw2
+    restart: always
+    ports:
+      - '8000:8000'
+  app2:
+    build: ./hw3
+    restart: always
+    ports:
+      - '8001:8001'
