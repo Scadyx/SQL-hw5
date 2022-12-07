@@ -9,7 +9,7 @@ import httpx
 app = FastAPI()
 
 
-async def parser(url: str = 'app2:8000/users'):
+async def parser(url: str = 'http://app:8000/users/'):
     async with httpx.AsyncClient() as client:
         responses = await client.get(url)
     return responses.json()
