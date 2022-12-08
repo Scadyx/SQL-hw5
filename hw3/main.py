@@ -9,10 +9,12 @@ import httpx
 app = FastAPI()
 
 
-async def parser(url: str = 'http://app:8000/users/'):
+async def parser(url: str = 'http://app:8000/users'):
     async with httpx.AsyncClient() as client:
         responses = await client.get(url)
     return responses.json()
+
+
 
 
 async def run_thread_pool(method, args):
@@ -28,18 +30,20 @@ class Worker:
 
     def medians(self, data):
         result = []
-        for user in data.values():
-            if user['age'] is not None:
-                result.append(user['age'])
+        for user in data:
+            print(user)
+            if user[0]['age'] is not None:
+                result.append(user[0]['age'])
         print(result)
+
         return {'median': median(result)}
 
     def age_range(self, data):
         minmax = []
-        for user in data.values():
-            if 'age' in user:
-                if user['age'] is not None:
-                    if user['age'] >= 20 and user['age'] <= 30:
+        for user in data:
+            if 'age' in user[0]:
+                if user[0]['age'] is not None:
+                    if user[0]['age'] >= 20 and user[0]['age'] <= 30:
                         minmax.append(user)
             else:
                 continue
@@ -47,9 +51,9 @@ class Worker:
 
     def unique_names(self, data):
         names = []
-        for user in data.values():
-            if user['name'] is not None:
-                names.append(user['name'])
+        for user in data:
+            if user[0]['name'] is not None:
+                names.append(user[0]['name'])
         res = Counter(names)
         return res
 
