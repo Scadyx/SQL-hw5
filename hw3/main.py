@@ -43,7 +43,7 @@ class Worker:
         for user in data:
             if 'age' in user[0]:
                 if user[0]['age'] is not None:
-                    if user[0]['age'] >= 20 and user[0]['age'] <= 30:
+                    if user[0]['age'] >= '20' and user[0]['age'] <= '30':
                         minmax.append(user)
             else:
                 continue
